@@ -1,0 +1,26 @@
+﻿namespace BOJ
+{
+    internal class Program31429
+    {
+        static readonly (int a, int b)[] data = {
+            (12, 1600),
+            (11, 894),
+            (11, 1327),
+            (10, 1311),
+            (9, 1004),
+            (9, 1178),
+            (9, 1357),
+            (8, 837),
+            (7, 1055),
+            (6, 556),
+            (6, 773)
+        };
+
+        static void Main()
+        {
+            int query = int.Parse((Console.ReadLine()))-1;
+            var (x, y) = data[query];
+            Console.WriteLine($"{x} {y}");
+        }
+    }
+}

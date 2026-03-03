@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BOJ": {
+      "commandName": "Project",
+      "commandLineArgs": "< input.txt > output.txt"
+    }
+  }
+}
