@@ -9,10 +9,18 @@
 
 ## 실행 방법
 
-아래 예시처럼 `StartupObject`를 실행할 클래스로 지정한 뒤 빌드하여 실행합니다.
+이 프로젝트는 여러 풀이 파일이 하나의 프로젝트에 포함되므로, 실행할 문제를 `BOJ/BOJ.csproj`의 `StartupObject`에 지정해야 합니다.
+
+**1단계**: `BOJ/BOJ.csproj`의 `StartupObject`를 실행할 클래스명으로 변경합니다.
+
+```xml
+<!-- 예: 1000번 문제를 실행하려면 -->
+<StartupObject>BOJ.Program1000</StartupObject>
+```
+
+**2단계**: 프로젝트 디렉터리를 지정해 실행합니다. (`--project BOJ`는 `BOJ/BOJ.csproj`가 위치한 폴더를 가리킵니다.)
 
 ```bash
-# BOJ.csproj의 StartupObject를 변경하거나, dotnet run으로 직접 실행
 dotnet run --project BOJ < input.txt > output.txt
 ```
 
