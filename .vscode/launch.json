@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug BOJ (select problem)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build BOJ",
+      "program": "${workspaceFolder}/BOJ/bin/Debug/net10.0/BOJ.dll",
+      "args": ["${input:bojProblem}"],
+      "cwd": "${workspaceFolder}/BOJ",
+      "stopAtEntry": false,
+      "console": "integratedTerminal"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "bojProblem",
+      "type": "promptString",
+      "description": "Problem number (e.g. 6696)",
+      "default": "6696"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build BOJ",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}/BOJ/BOJ.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
+      "label": "run BOJ (select problem, input.txt -> output.txt)",
+      "type": "process",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "type nul > \"${workspaceFolder}\\BOJ\\output.txt\" & dotnet \"${workspaceFolder}\\BOJ\\bin\\Debug\\net10.0\\BOJ.dll\" ${input:bojProblem} < \"${workspaceFolder}\\BOJ\\input.txt\" > \"${workspaceFolder}\\BOJ\\output.txt\""
+      ],
+      "dependsOn": "build BOJ",
+      "problemMatcher": []
+    },
+    {
+      "label": "compare output with expected.txt",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-Command",
+        "$expected='${workspaceFolder}/BOJ/expected.txt'; $output='${workspaceFolder}/BOJ/output.txt'; if (!(Test-Path $expected)) { Write-Host 'expected.txt not found:' $expected; exit 1 }; if (!(Test-Path $output)) { Write-Host 'output.txt not found:' $output; exit 1 }; $diff=Compare-Object (Get-Content $expected) (Get-Content $output); if ($null -eq $diff) { Write-Host 'PASS: output matches expected.txt'; exit 0 } else { Write-Host 'FAIL: output differs from expected.txt'; $diff | Format-Table -AutoSize; exit 1 }"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "run + compare BOJ",
+      "dependsOn": [
+        "run BOJ (select problem, input.txt -> output.txt)",
+        "compare output with expected.txt"
+      ],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "bojProblem",
+      "type": "promptString",
+      "description": "Problem number (e.g. 6696)",
+      "default": "6696"
+    }
+  ]
+}

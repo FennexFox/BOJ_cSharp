@@ -1,0 +1,2 @@
+The property will be flooded in hour 1.
+The property will be flooded in hour 20.
